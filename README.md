@@ -1,4 +1,4 @@
-# WEBMONEY модуль для NoDeny 49/50
+# WebMoney модуль для NoDeny 49/50
 
 Модуль для биллинговой системы NoDeny реализует протокол взаимодействия с [платежной системой WEBMONEY](http://www.webmoney.ru).
 
