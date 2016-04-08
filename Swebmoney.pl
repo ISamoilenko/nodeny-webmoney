@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-use Digest::MD5 qw(md5_hex);
+use Digest::SHA qw(sha256_hex);
 
 sub WM_main
 {
@@ -9,25 +9,25 @@ sub WM_main
   my $LMI_RESULT_URL = "http://STATLINK/cgi-bin/webmoney.pl";
   my $LMI_PAYEE_PURSE = 'WMNUMBER';
 
-  &OkMess('Оплата произведена успешно') if ($F{result} eq 'success');
-  &ErrorMess('Ошибка оплаты либо отказ') if ($F{result} eq 'fail');
+  &OkMess('ГЋГЇГ«Г ГІГ  ГЇГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­Г  ГіГ±ГЇГҐГёГ­Г®') if ($F{result} eq 'success');
+  &ErrorMess('ГЋГёГЁГЎГЄГ  Г®ГЇГ«Г ГІГ» Г«ГЁГЎГ® Г®ГІГЄГ Г§') if ($F{result} eq 'fail');
   
   $paket=&sql_select_line($dbh, "SELECT price FROM plans2 WHERE id='$pm->{paket}'");
 
   &Message(
-    "<h2>Оплата через платежную систему WebMoney</h2><br>
-     <form name=\"payform\" onsubmit=\"if (document.forms.payform.amount.value < 10) {alert('Сумма меньше 10'); return false; } else return true;\" method=post action=\"$ACTION\">
+    "<h2>ГЋГЇГ«Г ГІГ  Г·ГҐГ°ГҐГ§ ГЇГ«Г ГІГҐГ¦Г­ГіГѕ Г±ГЁГ±ГІГҐГ¬Гі WebMoney</h2><br>
+     <form name=\"payform\" onsubmit=\"if (document.forms.payform.amount.value < 10) {alert('Г‘ГіГ¬Г¬Г  Г¬ГҐГ­ГјГёГҐ 10'); return false; } else return true;\" method=post action=\"$ACTION\">
       <input type=\"hidden\" name=\"LMI_PAYEE_PURSE\" value=\"$LMI_PAYEE_PURSE\">
       <input type=\"hidden\" name=\"LMI_PAYMENT_NO\" value=\"$Mid\">
-      <input type=\"hidden\" name=\"LMI_PAYMENT_DESC\" value=\"Оплата за услуги ($pm->{fio})\">
+      <input type=\"hidden\" name=\"LMI_PAYMENT_DESC\" value=\"ГЋГЇГ«Г ГІГ  Г§Г  ГіГ±Г«ГіГЈГЁ ($pm->{fio})\">
       <input type=\"hidden\" name=\"LMI_RESULT_URL\" value=\"$LMI_RESULT_URL\">
       <input type=\"hidden\" name=\"LMI_SUCCESS_URL\" value=\"$STAT_URL&result=success\">
       <input type=\"hidden\" name=\"LMI_FAIL_URL\" value=\"$STAT_URL&result=fail\">
-      <span><b>ФИО:</b> $pm->{fio}</span><br>
-      <span><b>Номер договора:</b> $pm->{name}</font></span><br><br>
-      <span><b>Введите сумму для оплаты:</span><br><br>
+      <span><b>Г”Г€ГЋ:</b> $pm->{fio}</span><br>
+      <span><b>ГЌГ®Г¬ГҐГ° Г¤Г®ГЈГ®ГўГ®Г°Г :</b> $pm->{name}</font></span><br><br>
+      <span><b>Г‚ГўГҐГ¤ГЁГІГҐ Г±ГіГ¬Г¬Гі Г¤Г«Гї Г®ГЇГ«Г ГІГ»:</span><br><br>
       <input type=\"text\" name=\"LMI_PAYMENT_AMOUNT\" value=\"$paket->{price}\">&nbsp$gr<br><br>
-      <input type=\"submit\" value=\"Перейти к оплате\">
+      <input type=\"submit\" value=\"ГЏГҐГ°ГҐГ©ГІГЁ ГЄ Г®ГЇГ«Г ГІГҐ\">
     </form>");
 }
 
