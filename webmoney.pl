@@ -4,7 +4,7 @@ use DBI;
 use Time::localtime;
 use Time::Local;
 use MIME::Base64;
-use Digest::MD5 qw(md5_hex);
+use Digest::SHA qw(sha256_hex);
 use CGI;
 
 my $LMI_PAYEE_PURSE = 'WMNUMBER';
@@ -65,7 +65,7 @@ my @HASH = (
   $c->param('LMI_PAYER_PURSE'),
   $c->param('LMI_PAYER_WM')
 );
-return_fail "LMI_HASH" unless uc(md5_hex(join('', @HASH))) eq uc($c->param('LMI_HASH'));
+return_fail "LMI_HASH" unless uc(sha256_hex(join('', @HASH))) eq uc($c->param('LMI_HASH'));
 
 $TRANS = $c->param('LMI_SYS_TRANS_NO');
 $INVS = $c->param('LMI_SYS_INVS_NO');
@@ -82,7 +82,7 @@ $TRANS_DATE = $c->param('LMI_SYS_TRANS_DATE');
                 office=0,
                 bonus='y',
                 reason='$TRANS',
-                coment='Перевод WebMoney (счет: $INVS, транзакция: $TRANS)',
+                coment='ГЏГҐГ°ГҐГўГ®Г¤ WebMoney (Г±Г·ГҐГІ: $INVS, ГІГ°Г Г­Г§Г ГЄГ¶ГЁГї: $TRANS)',
                 type=10,
                 category='$CATEGORY'");
 
